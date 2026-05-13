@@ -9,3 +9,9 @@ Graphs are consisted on nodes and edges. LangGrpah's calculations are done using
 For adding conditions to the graph, we can use add_conditional_edge method.
 
 ![conditional graph](/images/conditional_graph.png)
+
+3. Chatbot
+
+To create simple chatbot, we can just simply maintain its short term memory using a state (include messages in a state and append the future messages to it)
+
+![chatbot graph](/images/chatbot.png)
