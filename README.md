@@ -15,3 +15,9 @@ For adding conditions to the graph, we can use add_conditional_edge method.
 To create simple chatbot, we can just simply maintain its short term memory using a state (include messages in a state and append the future messages to it)
 
 ![chatbot graph](/images/chatbot.png)
+
+4. chatbot with tool call
+
+We can bind set of tools to the llm using langchain_core module. when we invoke llm with tools, llm can decide whehter it needs to call a tool or not.
+
+![tool call graph](/images/tool_call.png)
