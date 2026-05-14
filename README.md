@@ -31,3 +31,8 @@ Here, tool response goes to chatbot and process it before final response gets pr
 6. use memory saver
 
 By using memory saver, we do not need to handle the past messages (we need to handle only if we need it, llm handles that automatically using memory saver). when invoking the model (graph), we just need to pass current message and config (we can specify a thread id. using config, we can handle separate memory spaces for different chats).
+
+7. human in the loop
+
+If everything is automated, then the control will be less. So, we can involve human in the loop. as an example, if some tool is called, we can create an interrupt and asks the user a confirmation for it. 
+Interrupt will be handled before going to end state of the graph using user command.
