@@ -27,3 +27,7 @@ We can bind set of tools to the llm using langchain_core module. when we invoke 
 Here, tool response goes to chatbot and process it before final response gets prepared.
 
 ![tool call agent graph](/images/tool_call_agent.png)
+
+6. use memory saver
+
+By using memory saver, we do not need to handle the past messages (we need to handle only if we need it, llm handles that automatically using memory saver). when invoking the model (graph), we just need to pass current message and config (we can specify a thread id. using config, we can handle separate memory spaces for different chats).
