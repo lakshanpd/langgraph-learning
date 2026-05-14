@@ -1,38 +1,86 @@
-1. Simple Graph
+# LangGraph Fundamentals
 
-Graphs are consisted on nodes and edges. LangGrpah's calculations are done using graph based system. There is a state to define. Then it passes through edges to different nodes. Inside nodes, the state will be changed according to the login defined by functions. Those functions take state as the input and return updated state.
+## 1. Simple Graph
+
+Graphs consist of nodes and edges. :contentReference[oaicite:0]{index=0} uses a graph-based execution system for computations and workflows.
+
+A state must first be defined. Then, the state passes through edges to different nodes. Inside each node, the state is modified according to the logic defined by the corresponding function.
+
+These functions:
+- take the current state as input
+- return the updated state
 
 ![simple graph](/images/simple_graph.png)
 
-2. Conditional Edges
+---
 
-For adding conditions to the graph, we can use add_conditional_edge method.
+## 2. Conditional Edges
+
+To add conditions to the graph, we can use the `add_conditional_edges` method.
+
+This allows the graph to dynamically decide the next node based on the current state or logic.
 
 ![conditional graph](/images/conditional_graph.png)
 
-3. Chatbot
+---
 
-To create simple chatbot, we can just simply maintain its short term memory using a state (include messages in a state and append the future messages to it)
+## 3. Chatbot
+
+To create a simple chatbot, we can maintain short-term memory using the graph state.
+
+This is typically done by:
+- storing messages inside the state
+- appending future messages to the existing message history
 
 ![chatbot graph](/images/chatbot.png)
 
-4. chatbot with tool call
+---
 
-We can bind set of tools to the llm using langchain_core module. when we invoke llm with tools, llm can decide whehter it needs to call a tool or not.
+## 4. Chatbot with Tool Calls
+
+We can bind a set of tools to the LLM using the `langchain_core` module.
+
+When invoking the LLM with tools, the model can decide whether it needs to call a tool or directly respond to the user.
 
 ![tool call graph](/images/tool_call.png)
 
-5. tool call agent
+---
 
-Here, tool response goes to chatbot and process it before final response gets prepared.
+## 5. Tool Call Agent
+
+In this architecture, the tool response is sent back to the chatbot before generating the final response.
+
+This enables the LLM to:
+- process tool outputs
+- reason over external information
+- generate a more accurate final response
 
 ![tool call agent graph](/images/tool_call_agent.png)
 
-6. use memory saver
+---
 
-By using memory saver, we do not need to handle the past messages (we need to handle only if we need it, llm handles that automatically using memory saver). when invoking the model (graph), we just need to pass current message and config (we can specify a thread id. using config, we can handle separate memory spaces for different chats).
+## 6. Using Memory Saver
 
-7. human in the loop
+By using `MemorySaver`, we do not need to manually manage previous messages.
 
-If everything is automated, then the control will be less. So, we can involve human in the loop. as an example, if some tool is called, we can create an interrupt and asks the user a confirmation for it. 
-Interrupt will be handled before going to end state of the graph using user command.
+When invoking the graph, we only need to pass:
+- the current message
+- the configuration object
+
+The configuration can include a `thread_id`, which allows separate memory spaces for different chats or sessions.
+
+---
+
+## 7. Human in the Loop
+
+If everything is fully automated, user control becomes limited.
+
+To address this, we can introduce a **human-in-the-loop** mechanism.
+
+For example:
+- when a tool is about to perform an important action
+- the graph can create an interrupt
+- ask the user for confirmation
+- continue execution based on the user’s decision
+
+Interrupts are handled before reaching the end state of the graph using user commands.
